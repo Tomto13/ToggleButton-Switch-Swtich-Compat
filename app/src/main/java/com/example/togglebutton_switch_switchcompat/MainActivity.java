@@ -27,21 +27,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        //Incializacion del boton
-        toggleButton = findViewById(R.id.toggleButton);
+        // Declaración de los componentes de la interfaz
+        toggleButton = findViewById(R.id.toggleButton); // Botón utilizado para esconder/mostrar el texto
         textoSalida = findViewById(R.id.txtSalida);
-        switchN = findViewById(R.id.switchN);
-        switchCompat = findViewById(R.id.switchCompat);
+        switchN = findViewById(R.id.switchN); // Switch encargado del modo oscuro
+        switchCompat = findViewById(R.id.switchCompat); // SwitchCompat encargado de mostrar/ocultar la imagen
         imageView = findViewById(R.id.imageView);
 
-
+        // Verifica si el ToggleButton ya está activo para mostrar u ocultar el texto
         if (toggleButton.isChecked()) {
             textoSalida.setVisibility(TextView.VISIBLE);
         } else {
             textoSalida.setVisibility(TextView.INVISIBLE);
         }
+        // Obtiene la configuración actual del sistema para saber si está activado el modo oscuro
         int currentNightMode = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
-
+        // Sincroniza el switch con el estado actual del sistema sin alterar la preferencia del usuario
         boolean isDarkMode = (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES);
 
         switchN.setChecked(isDarkMode);
@@ -62,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    //Cuando esta activo
+                    //Cuando esta activo muestra el texto
                     textoSalida.setVisibility(TextView.VISIBLE);
                 }else{
-                    //Cuando esta inactivo
+                    //Cuando esta inactivo oculta el texto
                     textoSalida.setVisibility((TextView.INVISIBLE));
                 }
             }
@@ -75,8 +76,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
+                    //activa el modo oscuro
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 } else {
+                    //desactiva el modo oscuro
                     AppCompatDelegate.setDefaultNightMode((AppCompatDelegate.MODE_NIGHT_NO));
                 }
 
@@ -87,8 +90,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
+                    //muestra la imagen
                     imageView.setVisibility(ImageView.VISIBLE);
                 } else{
+                    //oculta la imagen
                     imageView.setVisibility(ImageView.INVISIBLE);
                 }
             }
